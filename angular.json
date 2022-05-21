@@ -17,6 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
             "outputPath": "dist/nachhilfe-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -24,7 +26,9 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/.htaccess",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.css"
@@ -91,7 +95,9 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/.htaccess",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.css"

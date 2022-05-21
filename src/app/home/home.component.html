@@ -1,0 +1,27 @@
+<div class="px-12 pb-12 xl:flex w-4/5 max-w-screen-2xl mx-auto items-center">
+  <div>
+    <div class="text-gray-700 flex justify-start items-center mb-12">
+      <div class="mr-12" [ngClass]="isLoggedIn() ? 'w-full' : 'w-1/2'">
+        <h2 class="text-2xl uppercase mb-4">Nachhilfe geben</h2>
+        <p>Erstelle heute noch dein Nachhilfeangebot, um deinen Mitstudent*innen zu helfen und
+        selbst Taschengeld hinzuzuverdienen!</p>
+      </div>
+      <a routerLink="/login" class="w-64 text-center bg-transparent hover:bg-gray-800 duration-200 text-gray-700 hover:text-white py-3 px-4 border border-gray-800 hover:border-transparent rounded">
+        Jetzt Nachhilfe geben
+      </a>
+    </div>
+
+    <div class="text-gray-700 flex justify-start items-center">
+      <div class="mr-12" [ngClass]="isLoggedIn() ? 'w-full' : 'w-1/2'">
+        <h2 class="text-2xl uppercase mb-4">Nachhilfe suchen</h2>
+        <p>Suche in über 100 Angeboten von Mitstudierenden dein passendes Fach, fixiere einen Nachhilfetermin und
+        hol dir deine guten Noten!</p>
+      </div>
+      <a routerLink="/offers" class="w-64 text-center bg-transparent hover:bg-gray-800 duration-200 text-gray-700 hover:text-white py-3 px-4 border border-gray-800 hover:border-transparent rounded">
+        Jetzt Nachhilfe suchen
+      </a>
+    </div>
+  </div>
+  <app-login></app-login>
+</div>
+

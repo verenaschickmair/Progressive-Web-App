@@ -1,0 +1,79 @@
+<div class="container w-2/3 mx-auto" *ngIf="isLoggedIn()">
+  <div class="text-center">
+  <button type="button" class="text-center w-96 bg-gray-800 border border-gray-800 rounded text-white py-3 hover:bg-transparent duration-200 hover:text-gray-700 hover:border-gray-800" (click)="logout()">Logout</button>
+  </div>
+  <div class="flex mt-12 flex-wrap justify-center max-w-screen-2xl">
+    <!-- Left Side -->
+    <div class="w-1/3 md:mx-2 mb-12">
+      <!-- Profile Card -->
+        <div class="image overflow-hidden mb-6">
+          <img class="h-56 w-56 w-full mx-auto"
+               src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
+               alt="">
+        </div>
+        <ul
+          class="bg-white text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+          <li class="flex items-center py-3">
+            <span>Status</span>
+            <span class="ml-auto"><span
+              class="bg-gray-800 py-1 px-2 rounded text-white text-sm">Nachhilfe-Anbieterin</span></span>
+          </li>
+          <li class="flex items-center py-3">
+            <span>Member since</span>
+            <span class="ml-auto">Nov 07, 2016</span>
+          </li>
+        </ul>
+      </div>
+
+    <!-- Right Side -->
+    <div class="w-1/3 ml-12 mx-2">
+      <!-- Profile tab -->
+      <!-- About Section -->
+      <div class="bg-white px-3 rounded-sm">
+        <h2 class="text-2xl">Meine Daten</h2>
+        <div class="text-gray-700">
+          <div class="grid text-sm">
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Vorname</div>
+              <div class="py-2">Jane</div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Last Name</div>
+              <div class="py-2">Doe</div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Gender</div>
+              <div class="py-2">Female</div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Contact No.</div>
+              <div class="py-2">+11 998001001</div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Current Address</div>
+              <div class="py-2">Beech Creek, PA, Pennsylvania</div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Permanant Address</div>
+              <div class="py-2">Arlington Heights, IL, Illinois</div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Email.</div>
+              <div class="py-2">
+                <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
+              </div>
+            </div>
+            <div class="grid grid-cols-2">
+              <div class="py-2 font-semibold">Birthday</div>
+              <div class="py-2">Feb 06, 1998</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of about section -->
+
+      </div>
+      <!-- End of profile tab -->
+  </div>
+</div>
+

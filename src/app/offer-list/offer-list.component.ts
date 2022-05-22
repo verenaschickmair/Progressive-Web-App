@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../shared/user.service";
 
 @Component({
   selector: 'app-offer-list',
@@ -16,22 +17,27 @@ export class OfferListComponent implements OnInit {
   public sortName = "Datum";
   public categoryName = "Alle";
   public isLoggedIn = window.localStorage.getItem('token');
+  private loginUserId? : number;
 
-  constructor() {
+  constructor(private us : UserService) {
   }
 
   ngOnInit(): void {
     this.getInitState();
+    this.us.getLoggedInUser();
+    this.us.userId?.subscribe((u) => this.loginUserId = u);
   }
 
   public getInitState(mode? : string, value?: string){
     // /* PAGINATION */
     this.openTab = false;
     this.openOrderTab = false;
+    this.totalPages = 1;
 
     if(mode && value) {
       this.offerList = [];
-      this.filter.set(mode, value);
+      this.filter.set(mode, value)
+      this.updateFilterName(mode, value);
       this.generateFilterString();
         fetch(`https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/sb_offer?per_page=4&${this.filterString}`)
         .then((response) => {
@@ -41,7 +47,8 @@ export class OfferListComponent implements OnInit {
         .then(offers => {
           this.renderPosts(offers);
         });
-    } else{
+    }
+    else{
       this.offerList = [];
       this.currentPage = 1;
       this.filter.delete("categories");
@@ -54,6 +61,38 @@ export class OfferListComponent implements OnInit {
         .then(offers => {
           this.renderPosts(offers);
         });
+    }
+  }
+
+  private updateFilterName(mode:string, value:string){
+    if(mode === "categories"){
+      switch (value) {
+        case "5":
+          this.categoryName = "Deutsch";
+          break;
+        case "6":
+          this.categoryName = "Englisch";
+          break;
+        case "7":
+          this.categoryName = "Mathematik";
+          break;
+        case "8":
+          this.categoryName = "Informatik";
+          break;
+        case "9":
+          this.categoryName = "Biologie";
+          break;
+    }
+  }
+    else {
+      switch (value) {
+        case "date":
+          this.sortName = "Datum";
+          break;
+        case "author":
+          this.sortName = "Ersteller:in";
+          break;
+      }
     }
   }
 
@@ -89,19 +128,13 @@ export class OfferListComponent implements OnInit {
   private renderPosts(offers: any) {
     for (let offer of offers) {
       let offerMap: Map<any, any> = new Map();
+      offerMap.set('id', offer.id);
       for (const [key, value] of Object.entries(offer.acf)) {
         offerMap.set(key, value);
       }
-      offerMap.set("image", OfferListComponent.generateUserImage(offerMap.get("user").user_avatar));
+      // offerMap.set("image", OfferListComponent.generateUserImage(offerMap.get("user").user_avatar));
       this.offerList.push(offerMap);
     }
-  }
-
-  private static generateUserImage(image: string): string {
-    const div = document.createElement('div')
-    div.innerHTML = image
-    const img = div.querySelector('img')
-    return img!.src;
   }
 
   public toggle(order? : string){
@@ -110,6 +143,4 @@ export class OfferListComponent implements OnInit {
     else
       return this.openTab = !this.openTab;
   }
-
-
 }

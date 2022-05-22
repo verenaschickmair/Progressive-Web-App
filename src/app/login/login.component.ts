@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "../shared/authentication.service";
 import {Router} from "@angular/router";
+import {UserService} from "../shared/user.service";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService : AuthenticationService, private router : Router) { }
+  constructor(private authService : AuthenticationService, private router : Router, private us : UserService) { }
   @ViewChild('username') username!: ElementRef;
   @ViewChild('password') password!: ElementRef;
 
@@ -25,8 +26,10 @@ export class LoginComponent implements OnInit {
     console.log(credentials);
     if (credentials.username && credentials.password) {
         await this.authService.login(credentials);
-        if(await this.authService.isLoggedIn())
+        if(await this.authService.isLoggedIn()) {
+          this.us.getLoggedInUser();
           await this.router.navigateByUrl("profile");
+        }
       }
     else{
       alert("Bitte Benutzername und Passwort eingeben!")

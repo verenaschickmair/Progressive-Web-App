@@ -18,11 +18,9 @@ const routes: Routes = [
   { path: 'requests', component: RequestListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'offer-detail', component: OfferDetailComponent },
-  { path: 'request-detail', component: RequestDetailComponent },
+  { path: 'offer/:id', component: OfferDetailComponent },
   { path: 'new-offer', component: NewOfferComponent },
-  { path: 'new-request', component: NewRequestComponent },
-
+  { path: 'edit-offer/:id', component: NewOfferComponent },
 ];
 
 @NgModule ({

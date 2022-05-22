@@ -1,10 +1,9 @@
 {
-  "name": "Studybuddy",
+  "name": "StudyBuddy",
   "short_name": "studbud",
-  "theme_color": "#2233cc",
-  "background_color": "#2233cc",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "display": "standalone",
-  "orientation": "/",
   "scope": "/",
   "start_url": "/index.html",
   "icons": [
@@ -36,6 +35,11 @@
     {
       "src": "assets/icons/icon-192x192.png",
       "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "256x256",
       "type": "image/png"
     },
     {

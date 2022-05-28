@@ -16,12 +16,6 @@ export class OfferService {
   }
 
   deleteOffer(id: string) {
-    // let myHeaders = new Headers();
-    // myHeaders.append("Authorization", "Bearer " + window.localStorage.getItem('token'));
-    //
-    // // @ts-ignore
-    // return this.http.delete<any>(`${this.api}/${id}`,myHeaders);
-
     let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + window.localStorage.getItem('token'));
     let options = {

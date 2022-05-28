@@ -18,6 +18,7 @@ import { RequestDetailComponent } from './request-detail/request-detail.componen
 import { NewOfferComponent } from './new-offer/new-offer.component';
 import { NewRequestComponent } from './new-request/new-request.component';
 import { OfferComponent } from './offer/offer.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OfferComponent } from './offer/offer.component';
     RequestDetailComponent,
     NewOfferComponent,
     NewRequestComponent,
-    OfferComponent
+    OfferComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule,

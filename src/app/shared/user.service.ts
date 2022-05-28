@@ -9,40 +9,13 @@ import { from } from 'rxjs';
 export class UserService {
 
   private api_token = 'https://api.s1910456028.student.kwmhgb.at/wp-json/jwt-auth/v1/token';
-  user? = new BehaviorSubject({});
-  userId? = new BehaviorSubject(0);
+  userId = new BehaviorSubject<any>(0);
+  user = new BehaviorSubject<any>({})
 
   constructor(private router: Router) {
   }
 
-  getUser(credentials: Object): void {
-    fetch(this.api_token, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    }).then(function (response) {
-      console.log(response.status)
-      if (response.status != 200) {
-        alert("Fehlgeschlagen! " + response.status);
-        console.log("Fehlgeschlagen")
-        console.log(response);
-        return false;
-      }
-      return response; // im response ist token drinnen
-    }).then(response => {
-      if (response != false) response.json().then(response => {
-        console.log(response)
-        window.localStorage.setItem("token", response.token);
-        window.localStorage.setItem("user_display_name", response.user_display_name);
-        console.log(window.localStorage.getItem("token"));
-        this.router.navigateByUrl("profile")
-      })
-    });
-  }
-
-  getLoggedInUser() : void {
+  getLoggedInUser() {
     let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + window.localStorage.getItem('token'));
     let options = {
@@ -51,13 +24,16 @@ export class UserService {
       redirect: 'follow'
     };
     // @ts-ignore
-    fetch("https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/users/me", options)
+    return fetch("https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/users/me", options)
       .then(response => response.json())
-      .then(response => this.user?.next(response))
+      .then(response => {
+        this.user?.next(response);
+        return this.user.getValue();
+      })
       .catch(error => console.log('error', error));
   }
 
-  getLoggedInUserId() : void {
+  getLoggedInUserId() {
     let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + window.localStorage.getItem('token'));
     let options = {
@@ -66,9 +42,12 @@ export class UserService {
       redirect: 'follow'
     };
     // @ts-ignore
-    fetch("https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/users/me", options)
+    return fetch("https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/users/me", options)
       .then(response => response.json())
-      .then(response => this.userId?.next(response.id))
+      .then(response => {
+        this.userId?.next(response.id);
+        return this.userId.getValue();
+      })
       .catch(error => console.log('error', error));
   }
 }

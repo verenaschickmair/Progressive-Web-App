@@ -1,84 +1,145 @@
-<!--
-  This example requires Tailwind CSS v2.0+
+<!--<div class="w-1/2 mx-auto">-->
+<!--  <div>-->
+<!--  <div>-->
+<!--  <div>-->
+<!--    <h2 *ngIf="!offer" class="text-2xl text-center">Neues Angebot erstellen</h2>-->
+<!--    <h2 *ngIf="offer" class="text-2xl text-center">Angebot bearbeiten</h2>-->
 
-  This example requires some changes to your config:
+<!--    <form action="#" method="POST">-->
+<!--      <div class="shadow sm:rounded-md sm:overflow-hidden">-->
+<!--        <div class="px-4 col-span-6 py-5 bg-white space-y-6 sm:p-6">-->
+<!--          <div>-->
+<!--            <label for="title" class="block text-sm font-medium text-gray-700"> Titel </label>-->
+<!--            <div class="mt-1 flex rounded-md shadow-sm">-->
+<!--              <input id="title" [value]="offer?.acf.title ? offer.acf.title : ''" type="text" #title class="p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">-->
+<!--            </div>-->
+<!--          </div>-->
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-<div class="w-1/2 mx-auto">
+<!--          <div>-->
+<!--            <label for="about" class="block text-sm font-medium text-gray-700">Beschreibung</label>-->
+<!--            <div class="mt-1">-->
+<!--              <textarea id="about" [value]="offer?.acf.description ? offer?.acf.description: ''" #description name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded"></textarea>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--              <fieldset id="appointments">-->
+<!--                <label for="appointment_1" class="block text-sm font-medium text-gray-700">Bitte 3 mögliche Termine angeben</label>-->
+<!--                <input type="date" [value]="dateArray[0]" #appointment1 id="appointment_1" name="appointment_1" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">-->
+<!--                <input type="date" [value]="dateArray[1]" #appointment2 id="appointment_2" name="appointment_2" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">-->
+<!--                <input type="date" [value]="dateArray[2]" #appointment3 id="appointment_3" name="appointment_3" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">-->
+<!--              </fieldset>-->
+
+<!--          <div class="col-span-6 sm:col-span-3">-->
+<!--            <label for="country" class="block text-sm font-medium text-gray-700">Fach</label>-->
+<!--            <select id="country" (change)="onChange($event)" #subject name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">-->
+<!--              <option id="7" [value]="offer?.acf.subject === 'Mathematik' ? 'Mathematik' : ''">Mathematik</option>-->
+<!--              <option id="6" [value]="offer?.acf.subject === 'Englisch' ? 'Englisch' : ''">Englisch</option>-->
+<!--              <option id="5" [value]="offer?.acf.subject === 'Deutsch' ? 'Deutsch' : ''">Deutsch</option>-->
+<!--              <option id="8" [value]="offer?.acf.subject === 'Informatik' ? 'Informatik' : ''">Informatik</option>-->
+<!--              <option id="9" [value]="offer?.acf.subject === 'Biologie' ? 'Biologie' : ''">Biologie</option>-->
+<!--            </select>-->
+<!--          </div>-->
+
+<!--          <div>-->
+<!--            <label for="title" class="block text-sm font-medium text-gray-700"> Vorname </label>-->
+<!--            <div class="mt-1 flex rounded-md shadow-sm">-->
+<!--              <input id="firstname" [value]="offer?.acf.first_name ? offer.acf.first_name : ''" type="text" #firstname class="p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div>-->
+<!--            <label for="title" class="block text-sm font-medium text-gray-700"> Nachname </label>-->
+<!--            <div class="mt-1 flex rounded-md shadow-sm">-->
+<!--              <input id="lastname" [value]="offer?.acf.last_name ? offer.acf.last_name : ''" type="text" #lastname class="p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        <div class="px-4 py-3 text-center sm:px-6">-->
+<!--          <a (click)="stepBack()" class="cursor-pointer ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Zurück</a>-->
+<!--          <button *ngIf="!offer" type="submit" (click)="saveOffer($event, 'POST')" class="cursor-pointer ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Speichern</button>-->
+<!--          <button *ngIf="offer" type="submit" (click)="saveOffer($event, 'PUT')" class="cursor-pointer ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Speichern</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="w-1/2 mx-auto" *ngIf="loaded">
   <div>
-  <div>
-  <div>
-    <h2 *ngIf="!offer" class="text-2xl text-center">Neues Angebot erstellen</h2>
-    <h2 *ngIf="offer" class="text-2xl text-center">Angebot bearbeiten</h2>
+    <div>
+      <div>
+        <h2 *ngIf="!isUpdatingOffer" class="text-2xl text-center">Neues Angebot erstellen</h2>
+        <h2 *ngIf="isUpdatingOffer" class="text-2xl text-center">Angebot bearbeiten</h2>
+        <form [formGroup]="offerForm" (submit)="submitForm()">
+          <div class="shadow sm:rounded-md sm:overflow-hidden">
+            <div class="px-4 col-span-6 py-5 bg-white space-y-6 sm:p-6">
+              <div>
+                <label for="title" class="block text-sm font-medium text-gray-700"> Titel </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input type="text" formControlName="title" name="title" id="title" class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
+                  <div *ngIf="errors['title']" class="text-red-500"> {{ errors['title'] }}</div>
+                </div>
+              </div>
 
-    <form action="#" method="POST">
-      <div class="shadow sm:rounded-md sm:overflow-hidden">
-        <div class="px-4 col-span-6 py-5 bg-white space-y-6 sm:p-6">
-          <div>
-            <label for="title" class="block text-sm font-medium text-gray-700"> Titel </label>
-            <div class="mt-1 flex rounded-md shadow-sm">
-              <input id="title" [value]="offer?.acf.title ? offer.acf.title : ''" type="text" #title class="p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
-            </div>
-          </div>
+              <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Beschreibung</label>
+                <div class="mt-1">
+                  <textarea id="description" formControlName="description" name="description" rows="3" class="p-2 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full border border-gray-300 rounded"></textarea>
+                  <div *ngIf="errors['description']" class="text-red-500"> {{ errors['description'] }}</div>
+                </div>
+              </div>
 
-          <div>
-            <label for="about" class="block text-sm font-medium text-gray-700">Beschreibung</label>
-            <div class="mt-1">
-              <textarea id="about" [value]="offer?.acf.description ? offer?.acf.description: ''" #description name="about" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded"></textarea>
-            </div>
-          </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="subject" class="block text-sm font-medium text-gray-700">Fach</label>
+                <select id="subject" (change)="onChange($event)" formControlName="subject" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option id="7" [selected]="offer.acf.subject === 'mathematik'">Mathematik</option>
+                    <option id="6" [selected]="offer.acf.subject === 'englisch'">Englisch</option>
+                    <option id="5" [selected]="offer.acf.subject === 'deutsch'">Deutsch</option>
+                    <option id="8" [selected]="offer.acf.subject === 'informatik'">Informatik</option>
+                    <option id="9" [selected]="offer.acf.subject === 'biologie'">Biologie</option>
+                </select>
+              </div>
 
-              <fieldset id="appointments">
-                <label for="appointment_1" class="block text-sm font-medium text-gray-700">Bitte 3 mögliche Termine angeben</label>
-                <input type="date" [value]="dateArray[0]" #appointment1 id="appointment_1" name="appointment_1" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <input type="date" [value]="dateArray[1]" #appointment2 id="appointment_2" name="appointment_2" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <input type="date" [value]="dateArray[2]" #appointment3 id="appointment_3" name="appointment_3" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <fieldset>
+                <div formArrayName="appointments">
+                  <div *ngFor="let control of appointments.controls; let i = index; let l = last" formGroupName="{{i}}" class="flex items-center">
+                    <label for="date" class="flex-shrink-0 mr-6">{{i+1}}. Termin</label>
+                    <input type="date" id="date" formControlName="date" class="mr-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <div *ngIf="errors['date']" class="text-red-500"> {{ errors['date'] }}</div>
+                    <div *ngIf="l">
+                      <button (click)="addAppointmentControl()" class="px-2 bg-gray-800 text-white duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 border hover:border-gray-800 ml-2 rounded text-lg" type="button">+</button>
+                    </div>
+                  </div>
+                </div>
               </fieldset>
 
-          <div class="col-span-6 sm:col-span-3">
-            <label for="country" class="block text-sm font-medium text-gray-700">Fach</label>
-            <select id="country" (change)="onChange($event)" #subject name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-              <option id="7" [value]="offer?.acf.subject === 'Mathematik' ? 'Mathematik' : ''">Mathematik</option>
-              <option id="6" [value]="offer?.acf.subject === 'Englisch' ? 'Englisch' : ''">Englisch</option>
-              <option id="5" [value]="offer?.acf.subject === 'Deutsch' ? 'Deutsch' : ''">Deutsch</option>
-              <option id="8" [value]="offer?.acf.subject === 'Informatik' ? 'Informatik' : ''">Informatik</option>
-              <option id="9" [value]="offer?.acf.subject === 'Biologie' ? 'Biologie' : ''">Biologie</option>
-            </select>
-          </div>
+              <div>
+                <label for="first_name" class="block text-sm font-medium text-gray-700"> Vorname </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input id="first_name" formControlName="first_name" type="text"  class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
+                </div>
+              </div>
 
-          <div>
-            <label for="title" class="block text-sm font-medium text-gray-700"> Vorname </label>
-            <div class="mt-1 flex rounded-md shadow-sm">
-              <input id="firstname" [value]="offer?.acf.first_name ? offer.acf.first_name : ''" type="text" #firstname class="p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
+              <div>
+                <label for="last_name" class="block text-sm font-medium text-gray-700"> Nachname </label>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <input id="last_name" formControlName="last_name" type="text" class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
+                </div>
+              </div>
+
+              <div class="px-4 py-3 text-center sm:px-6">
+                <a (click)="stepBack()" class="w-28 ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800 cursor-pointer">Zurück</a>
+                <button type="submit" [disabled]="offerForm.invalid && !isUpdatingOffer" class="disabled:opacity-50 w-28 ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white cursor-pointer hover:text-gray-700 hover:border-gray-800">Speichern</button>
+              </div>
             </div>
           </div>
-
-          <div>
-            <label for="title" class="block text-sm font-medium text-gray-700"> Nachname </label>
-            <div class="mt-1 flex rounded-md shadow-sm">
-              <input id="lastname" [value]="offer?.acf.last_name ? offer.acf.last_name : ''" type="text" #lastname class="p-2 border border-gray-300 rounded focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
-            </div>
-          </div>
-
-        <div class="px-4 py-3 text-center sm:px-6">
-          <a (click)="stepBack()" class="cursor-pointer ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Zurück</a>
-          <button *ngIf="!offer" type="submit" (click)="saveOffer($event, 'POST')" class="cursor-pointer ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Speichern</button>
-          <button *ngIf="offer" type="submit" (click)="saveOffer($event, 'PUT')" class="cursor-pointer ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Speichern</button>
-        </div>
+        </form>
       </div>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
-</div>
-</div>
+
+

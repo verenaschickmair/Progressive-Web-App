@@ -18,6 +18,7 @@ export class OfferListComponent implements OnInit {
   public categoryName = "Alle";
   public isLoggedIn = window.localStorage.getItem('token');
   private loginUserId? : number;
+  loaded = false;
 
   constructor(private us : UserService) {
   }
@@ -26,6 +27,7 @@ export class OfferListComponent implements OnInit {
     this.getInitState();
     this.us.getLoggedInUser();
     this.us.userId?.subscribe((u) => this.loginUserId = u);
+    this.loaded = true;
   }
 
   public getInitState(mode? : string, value?: string){
@@ -39,14 +41,14 @@ export class OfferListComponent implements OnInit {
       this.filter.set(mode, value)
       this.updateFilterName(mode, value);
       this.generateFilterString();
-        fetch(`https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/sb_offer?per_page=4&${this.filterString}`)
-        .then((response) => {
-          this.paginate(response.headers.get("X-WP-TotalPages"));
-          return response;
-        }).then(response => response.json())
-        .then(offers => {
-          this.renderPosts(offers);
-        });
+      fetch(`https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/sb_offer?per_page=4&${this.filterString}`)
+      .then((response) => {
+        this.paginate(response.headers.get("X-WP-TotalPages"));
+        return response;
+      }).then(response => response.json())
+      .then(offers => {
+        this.renderPosts(offers);
+      });
     }
     else{
       this.offerList = [];

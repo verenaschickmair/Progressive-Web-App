@@ -27,11 +27,10 @@ export class AuthenticationService {
       },
       body: JSON.stringify(credentials)
     }).then(function (response) {
-      console.log(response.status)
       if (response.status != 200) {
         alert("Fehlgeschlagen! " + response.status);
-        console.log("Fehlgeschlagen")
-        console.log(response);
+        console.error("Fehlgeschlagen")
+        console.error(response);
         return false;
       }
       return response; // im response ist token drinnen

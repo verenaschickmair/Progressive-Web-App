@@ -13,17 +13,13 @@ export class OfferComponent implements OnInit {
   @Input() offer! : any;
   @Output() deleteEvent = new EventEmitter();
   public isLoggedIn = window.localStorage.getItem('token');
-  private loginUser? = {};
-  private loginUserId? : number;
+  private loginUserId = this.us.userId.getValue();
 
   constructor(private us : UserService, private os : OfferService) {
   }
 
   ngOnInit(): void {
-    this.us.getLoggedInUser();
     this.us.getLoggedInUserId();
-    this.us.user?.subscribe((u) => this.loginUser = u);
-    this.us.userId?.subscribe((u) => this.loginUserId = u);
   }
 
   deleteOffer(offer : any){

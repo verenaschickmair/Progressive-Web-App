@@ -4,19 +4,20 @@
     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
   </svg>
 </div>
-<div class="max-w-screen-2xl mx-auto" *ngIf="offer && loaded">
-  <a routerLink="/offers" class="w-28 ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Zurück</a>
+<div class="max-w-screen-2xl mx-auto text-center xl:text-left" *ngIf="offer && loaded">
+  <a routerLink="/offers" class="inline-block w-28 mb-12 xl:mb-0 xl:ml-12 py-3 px-4 text-center text-white border border-transparent duration-200 rounded bg-gray-800 hover:bg-white hover:text-gray-700 hover:border-gray-800">Zurück</a>
   <h2 class="text-center focus:outline-none text-3xl text-center mb-2 font-medium leading-5 text-gray-700">{{offer?.acf.title}}</h2>
-  <p class="text-center mb-12">ID: {{offer.id}}</p>
-  <div class="flex justify-center mb-16">
-        <img src="https://cdn.tuk.dev/assets/components/misc/doge-coin.png" alt="coin avatar" class="w-12 h-12 rounded-full" />
-          <div class="pl-3 text-left">
-            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">von {{offer?.acf.first_name}} {{offer?.acf.last_name}}</p>
-            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">Telefon: 0699/1063223</p>
-            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">Email-Adresse: jane@doe.com</p>
+  <p class="text-center mb-12">Angebots-ID: {{offer.id}}</p>
+  <div class="xl:flex-row flex flex-col justify-center items-center mb-16">
+        <img src="{{user.avatar_urls[96]}}" alt="avatar" class="xl:mr-6 rounded-full" />
+          <div class="pl-3 text-center xl:text-left">
+            <p class=" focus:outline-none text-sm leading-normal pt-2 text-gray-500">von {{user.name}}</p>
+            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500 text-sm">erstellt am {{offer.date}}</p>
+            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">Telefon: {{offer?.acf.phone}}</p>
+            <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">Email-Adresse: {{offer?.acf.email}}</p>
           </div>
-      <p class="ml-12 w-1/3 focus:outline-none text-left text-sm leading-5 text-gray-700 ">{{offer?.acf.description}}</p>
-      <div class="flex ml-12" *ngIf="loggedInUserId === offer.user">
+      <p class="xl:ml-12 xl:w-1/3 mx-6 xl:mx-0 focus:outline-none text-center mt-6 xl:mt-0 xl:text-left text-sm leading-5 text-gray-700 ">{{offer?.acf.description}}</p>
+      <div class="flex ml-12" *ngIf="user.id === offer.user">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
         </svg>
@@ -26,7 +27,7 @@
       </div>
   </div>
 
-  <div class="flex justify-center text-center mb-6" *ngIf="isLoggedIn">
+  <div class="xl:flex justify-center text-center mb-6">
     <div class="flex-shrink">
     <h3 class="text-center focus:outline-none text-xl text-center font-medium leading-5 mb-6 text-gray-700">Verfügbare Termine</h3>
     <!--Table-->
@@ -62,25 +63,27 @@
     </div>
     </div>
 
-    <div class="w-1/3">
+    <div class="xl:w-1/3">
     <h3 class="text-center focus:outline-none text-xl mb-1 text-center font-medium leading-5 text-gray-700">Kein passender Termin dabei?</h3>
     <p class="text-center text-sm mb-2 text-gray-700">Hinterlasse {{offer.acf.first_name}} ein Kommentar</p>
-    <div class="w-3/4 mx-auto mb-12">
-      <form class="w-full">
-        <div class="mb-2">
-        <textarea class="w-full h-32 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
-                  id="comment" name="comment" placeholder=""></textarea>
-        </div>
-        <button type="submit" class="px-4 border border-transparent py-3 text-white duration-200 bg-gray-800 hover:text-gray-700 hover:bg-white hover:border-gray-800 rounded">Absenden</button>
-      </form>
-    </div>
+      <div class="w-3/4 mx-auto mt-12" *ngIf="!isLoggedIn">Du musst dich hierfür <a class="underline hover:opacity-50" routerLink="../../login">einloggen</a>.</div>
+      <div class="w-3/4 mx-auto mb-12" *ngIf="isLoggedIn">
+        <form (submit)="addComment()" class="w-full" [formGroup]="commentForm">
+          <div class="mb-2">
+            <textarea formControlName="text" class="w-full h-32 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1"
+                      id="comment" name="comment" placeholder=""></textarea>
+            <div *ngIf="errors['text']" class="text-red-500 text-sm"> {{ errors['text'] }}</div>
+          </div>
+          <button [disabled]="commentForm.invalid" class="disabled:opacity-50 enabled:cursor-pointer px-4 border border-transparent py-3 text-white duration-200 bg-gray-800 hover:enabled:text-gray-700 hover:enabled:bg-white hover:enabled:border-gray-800 rounded">Absenden</button>
+        </form>
+      </div>
 </div>
   </div>
   <div *ngIf="comments && comments.length && isLoggedIn" class="mb-12">
     <h3 class="text-center focus:outline-none text-xl mb-1 text-center font-medium leading-5 text-gray-700">Kommentare</h3>
     <div class="flex justify-center" *ngFor="let comment of comments">
       <div class="w-1/2 bg-white p-4 my-2 rounded break-all shadow-lg">
-        <app-comment [comment]="comment"></app-comment>
+        <app-comment [comment]="comment" (deleteEvent)="renderComments()"></app-comment>
       </div>
     </div>
   </div>

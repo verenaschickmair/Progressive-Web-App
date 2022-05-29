@@ -7,36 +7,38 @@ import {UserService} from "../shared/user.service";
   styleUrls: ['./offer-list.component.css']
 })
 export class OfferListComponent implements OnInit {
-  public offerList: Array<Map<any, any>> = [];
-  public totalPages = 1;
-  public currentPage = 1;
-  public openTab = false;
-  public openOrderTab = false;
-  public filter = new Map();
-  public filterString? : string;
-  public sortName = "Datum";
-  public categoryName = "Alle";
-  public isLoggedIn = window.localStorage.getItem('token');
-  private loginUserId? : number;
+  offerList: Array<Map<any, any>> = [];
+  totalPages = 1;
+  currentPage = 1;
+  openCategotyTab = false;
+  openOrderTab = false;
+  filter = new Map();
+  filterString? : string;
+  sortName = "Datum";
+  categoryName = "Alle";
+  isLoggedIn = window.localStorage.getItem('token');
+  loginUser? : any;
   loaded = false;
 
   constructor(private us : UserService) {
   }
 
   ngOnInit(): void {
+    console.clear();
     this.getInitState();
-    this.us.getLoggedInUser();
-    this.us.userId?.subscribe((u) => this.loginUserId = u);
-    this.loaded = true;
   }
 
-  public getInitState(mode? : string, value?: string){
+  getInitState(mode? : string, value?: string){
     // /* PAGINATION */
-    this.openTab = false;
+    this.openCategotyTab = false;
     this.openOrderTab = false;
     this.totalPages = 1;
+    this.currentPage = 1;
+
+    console.assert(!!mode && !!value, "Keine Filter aktiv :)")
 
     if(mode && value) {
+      console.countReset("Offers");
       this.offerList = [];
       this.filter.set(mode, value)
       this.updateFilterName(mode, value);
@@ -52,7 +54,6 @@ export class OfferListComponent implements OnInit {
     }
     else{
       this.offerList = [];
-      this.currentPage = 1;
       this.filter.delete("categories");
       this.generateFilterString();
       fetch(`https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/sb_offer?per_page=4`)
@@ -129,20 +130,26 @@ export class OfferListComponent implements OnInit {
 
   private renderPosts(offers: any) {
     for (let offer of offers) {
+      console.count("Offers");
       let offerMap: Map<any, any> = new Map();
       offerMap.set('id', offer.id);
+      offerMap.set('date', offer.date);
       for (const [key, value] of Object.entries(offer.acf)) {
         offerMap.set(key, value);
       }
-      // offerMap.set("image", OfferListComponent.generateUserImage(offerMap.get("user").user_avatar));
       this.offerList.push(offerMap);
     }
+    this.loaded = true;
   }
 
   public toggle(order? : string){
-    if(order)
+    if(order){
+      this.openCategotyTab = false;
       return this.openOrderTab = !this.openOrderTab;
-    else
-      return this.openTab = !this.openTab;
+    }
+    else{
+      this.openOrderTab = false;
+      return this.openCategotyTab = !this.openCategotyTab;
+    }
   }
 }

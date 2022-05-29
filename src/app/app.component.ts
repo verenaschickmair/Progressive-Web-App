@@ -10,14 +10,10 @@ export class AppComponent implements OnInit{
   constructor(private authService : AuthenticationService) { }
 
   title = 'studentClient';
-
+  isLoggedIn = window.localStorage.getItem('token');
 
   ngOnInit(){
     Notification.requestPermission();
-  }
-
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
   }
 
 }

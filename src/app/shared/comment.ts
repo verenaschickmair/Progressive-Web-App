@@ -1,9 +1,11 @@
 export class Comment {
   constructor(
-    public id: number,
-    public acf : {
+    public categories: number[],
+    public title: string,
+    public status: "publish",
+    public fields : {
        text: string,
-       offer: number,
+       offer: number[],
        user: number,
     }
   ) { }

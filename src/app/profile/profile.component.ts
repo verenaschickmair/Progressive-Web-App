@@ -11,32 +11,21 @@ import {UserService} from "../shared/user.service";
 export class ProfileComponent implements OnInit {
 
   user? : any;
+  loaded = false;
+  isLoggedIn = window.localStorage.getItem('token');
+
 
   constructor(private authService : AuthenticationService, private router : Router, private us : UserService) { }
 
   ngOnInit(): void {
-    this.us.getLoggedInUser();
-    this.us.user?.subscribe((u) => {
+    this.us.getLoggedInUser().then((u) => {
       this.user = u;
+      this.loaded = true;
     })
-  }
-
-  isLoggedIn() : boolean {
-    return this.authService.isLoggedIn()
   }
 
   logout() : void{
     this.authService.logout();
     this.router.navigateByUrl("/login");
   }
-
-  // private generateUserImage(): string {
-  //   const div = document.createElement('div')
-  //   div.innerHTML = this.user.avatar_urls["96"];
-  //   const img = div.querySelector('img')
-  //   return img!.src;
-  // }
-
-
-
 }

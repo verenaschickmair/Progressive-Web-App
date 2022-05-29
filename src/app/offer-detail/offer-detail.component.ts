@@ -3,8 +3,10 @@ import {ActivatedRoute} from "@angular/router";
 import {OfferService} from "../shared/offer.service";
 import {UserService} from "../shared/user.service";
 import {CommentService} from "../shared/comment.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CommentFactoryService} from "../shared/comment-factory";
+import {CommentFormErrorMessages} from "./offer-detail-error-messages";
+import {Comment} from "../shared/comment";
 
 @Component({
   selector: 'app-offer-detail',
@@ -14,10 +16,11 @@ import {CommentFactoryService} from "../shared/comment-factory";
 export class OfferDetailComponent implements OnInit {
   offer? : any;
   comments? : any[];
-  loggedInUserId? = 0;
+  user? : any;
   loaded = false;
   commentForm : FormGroup;
   isLoggedIn = window.localStorage.getItem('token');
+  errors: {  [key: string]: string } = {};
 
   constructor(private route : ActivatedRoute,
               private os : OfferService,
@@ -29,18 +32,66 @@ export class OfferDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.clear();
     const params = this.route.snapshot.params;
     this.os.getSingle(params['id']).subscribe((o) => {
       this.offer = o;
-      this.cs.getAll().then((comments) => {
-        this.checkOfferId(comments);
-        this.us.getLoggedInUserId().then((userId) => {
-          this.loggedInUserId = userId;
-          this.loaded = true;
-        });
+      this.offer.date = new Date(this.offer.date).toLocaleDateString('de-DE');
+      this.us.getUserById(this.offer.acf.user).then((u) => {
+        this.user = u;
+        this.renderComments();
       });
+      this.commentForm = this.fb.group({
+        text: new FormControl("", [Validators.required, Validators.minLength(10)])
+      });
+      //CHECKING FOR ERRORS
+      this.commentForm.statusChanges.subscribe(() =>
+        this.updateErrorMessages()
+      )
+    })
+  }
 
+  renderComments(){
+    this.cs.getAll().then((comments) => {
+      this.checkOfferId(comments);
+      this.loaded = true;
+    });
+
+  }
+
+  updateErrorMessages() {
+    this.errors = {};
+
+    for (const message of CommentFormErrorMessages) {
+      const control = this.commentForm.get(message.forControl);
+      if (
+        control &&
+        control.dirty &&
+        control.invalid && control.errors &&
+        control.errors[message.forValidator] &&
+        !this.errors[message.forControl]
+      ) {
+        this.errors[message.forControl] = message.text;
+      }
+    }
+  }
+
+  public addComment(): void{
+    if(this.user.id) {
+      console.log(this.commentForm.value)
+      this.updateErrorMessages();
+      const comment: Comment = CommentFactoryService.fromObject(this.commentForm.value);
+      comment.fields.user = this.user.id;
+      comment.fields.offer = [this.offer.id];
+      comment.status = "publish";
+      comment.title = "Comment User " + comment.fields.user + " for Offer " + comment.fields.offer[0]
+      console.log(comment);
+
+      this.cs.createComment(comment).then((c) => {
+        new Notification("Kommentar erfolgreich verfasst!");
+        this.renderComments();
       })
+    }
   }
 
   checkOfferId(comments : any){

@@ -9,16 +9,18 @@ export class CommentFactoryService {
   constructor() { }
 
   static empty() : Comment {
-    return new Comment(0,{text: '', user: 0, offer: 0});
+    return new Comment([], '', 'publish', {text: '', user: 0, offer: []});
   }
 
   static fromObject (rawComment: any) : Comment {
     return new Comment(
-      rawComment.id,
+      [],
+      rawComment.title,
+      rawComment.status,
       {
-        text: rawComment.acf.text,
-        user: rawComment.acf.user,
-        offer: rawComment.acf.offer
+        text: rawComment.text,
+        user: rawComment.user,
+        offer: [rawComment.offer]
       }
     );
   }

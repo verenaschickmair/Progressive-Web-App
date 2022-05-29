@@ -1,7 +1,7 @@
-<div class="px-12 pb-12 xl:flex w-4/5 max-w-screen-2xl mx-auto items-center">
+<div class="xl:px-12 md:pb-12 xl:flex w-4/5 max-w-screen-2xl mx-auto items-center">
   <div>
-    <div class="text-gray-700 flex justify-start items-center mb-12">
-      <div class="mr-12" [ngClass]="isLoggedIn() ? 'w-full' : 'w-1/2'">
+    <div class="text-gray-700 text-center xl:text-left xl:flex justify-start items-center mb-16 xl:mb-12">
+      <div class="mb-6 xl:mb-0 xl:mr-12" [ngClass]="isLoggedIn ? 'w-full' : 'xl:w-1/2'">
         <h2 class="text-2xl uppercase mb-4">Nachhilfe geben</h2>
         <p>Erstelle heute noch dein Nachhilfeangebot, um deinen Mitstudent*innen zu helfen und
         selbst Taschengeld hinzuzuverdienen!</p>
@@ -11,8 +11,8 @@
       </a>
     </div>
 
-    <div class="text-gray-700 flex justify-start items-center">
-      <div class="mr-12" [ngClass]="isLoggedIn() ? 'w-full' : 'w-1/2'">
+    <div class="text-gray-700 text-center xl:text-left xl:flex justify-start items-center">
+      <div class="mb-6 xl:mb-0 xl:mr-12" [ngClass]="isLoggedIn ? 'w-full' : 'xl:w-1/2'">
         <h2 class="text-2xl uppercase mb-4">Nachhilfe suchen</h2>
         <p>Suche in über 100 Angeboten von Mitstudierenden dein passendes Fach, fixiere einen Nachhilfetermin und
         hol dir deine guten Noten!</p>
@@ -22,6 +22,8 @@
       </a>
     </div>
   </div>
-  <app-login></app-login>
+  <div class="mt-12">
+    <app-login></app-login>
+  </div>
 </div>
 

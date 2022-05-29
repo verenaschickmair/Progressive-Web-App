@@ -8,7 +8,7 @@ import {Validators} from "@angular/forms";
 export class OfferFactoryService {
 
   static empty() : Offer {
-    return new Offer(0,[],'','publish', {title: '', description: '', user: 0, subject: '', first_name: '', last_name: '', appointments:[]});
+    return new Offer(0,[],'','publish', {title: '', description: '', user: 0, subject: '', phone: '', email: '', appointments:[]});
   }
 
   static fromObject (rawOffer: any) : Offer {
@@ -22,8 +22,8 @@ export class OfferFactoryService {
         description: rawOffer.description,
         user: rawOffer.user,
         subject: rawOffer.subject,
-        first_name: rawOffer.first_name,
-        last_name: rawOffer.last_name,
+        phone: rawOffer.phone,
+        email: rawOffer.email,
         appointments: rawOffer.appointments
       }
     );

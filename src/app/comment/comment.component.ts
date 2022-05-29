@@ -12,9 +12,11 @@ import {Router} from "@angular/router";
 })
 export class CommentComponent implements OnInit {
 
-  @Input() comment! : Comment;
+  @Input() comment! : any;
   @Output() deleteEvent = new EventEmitter();
-  private loginUserId? = 0;
+  user? : any;
+  loginUserId? = 0;
+  loaded = false;
 
 
   constructor(private us : UserService,
@@ -23,8 +25,15 @@ export class CommentComponent implements OnInit {
               private router : Router) { }
 
   ngOnInit(): void {
-    this.us.getLoggedInUserId().then((userId) => this.loginUserId = userId);
-    // this.us.getSingle(this.comment.user_id).subscribe((u) => this.user = u);
+    this.us.getLoggedInUser()
+      .then((user) => {
+        this.us.getUserById(this.comment.acf.user).then((user) => {
+          this.user = user;
+        })
+        this.comment.date = new Date(this.comment.date).toLocaleDateString('de-DE');
+        this.loginUserId = user.id;
+        this.loaded = true;
+      });
   }
 
   isCurrentUserOwner() : boolean{

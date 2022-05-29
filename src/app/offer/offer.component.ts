@@ -12,26 +12,44 @@ export class OfferComponent implements OnInit {
 
   @Input() offer! : any;
   @Output() deleteEvent = new EventEmitter();
-  public isLoggedIn = window.localStorage.getItem('token');
-  private loginUserId = this.us.userId.getValue();
+  isLoggedIn = window.localStorage.getItem('token');
+  loginUser? : any;
+  user? : any;
+  loaded = false;
 
   constructor(private us : UserService, private os : OfferService) {
   }
 
   ngOnInit(): void {
-    this.us.getLoggedInUserId();
+    if(this.offer.get("user")) {
+      this.offer.set("date", new Date(this.offer.get("date")).toLocaleDateString('de-DE'));
+      this.us.getUserById(this.offer.get("user")).then((user) => {
+        this.user = user;
+        if(this.isLoggedIn){
+          this.us.getLoggedInUser().then((user) => {
+            this.loginUser = user;
+            console.table(this.loginUser);
+            this.loaded = true;
+          });
+        }
+        else this.loaded = true;
+      })
+    }
+    else this.loaded = true;
   }
 
   deleteOffer(offer : any){
     window.alert("Willst du wirklich dein Angebot löschen?");
     console.log(offer.get("id"));
     this.os.deleteOffer(offer.get("id")).then((e) => {
-      console.error("Wild!");
+      console.info("Wild!");
       this.deleteEvent.emit();
     });
   }
 
   public isOwner(authorId: number){
-    return this.loginUserId === authorId;
+    if(this.isLoggedIn)
+      return this.loginUser.id === authorId;
+    return false;
   }
 }

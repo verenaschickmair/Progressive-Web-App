@@ -13,30 +13,25 @@ export class LoginComponent implements OnInit {
   constructor(private authService : AuthenticationService, private router : Router, private us : UserService) { }
   @ViewChild('username') username!: ElementRef;
   @ViewChild('password') password!: ElementRef;
+  isLoggedIn = window.localStorage.getItem('token');
 
   ngOnInit(): void {
   }
 
   async login(event : Event){
     event.preventDefault();
+    console.time("Login");
+
     let credentials = {
       username: this.username.nativeElement.value,
       password: this.password.nativeElement.value
     }
-    console.log(credentials);
     if (credentials.username && credentials.password) {
         await this.authService.login(credentials);
-        if(await this.authService.isLoggedIn()) {
-          this.us.getLoggedInUser();
-          await this.router.navigateByUrl("profile");
-        }
+        console.timeEnd("Login");
       }
     else{
       alert("Bitte Benutzername und Passwort eingeben!")
     }
-  }
-
-  isLoggedIn() : boolean {
-    return this.authService.isLoggedIn();
   }
 }

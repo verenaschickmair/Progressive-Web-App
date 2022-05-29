@@ -1,11 +1,15 @@
-<div class="flex items-center border-b border-gray-200 pb-6 h-full">
-  <div class="flex items-start justify-between w-full text-gray-700">
-    <div class="pl-3">
-      <p class="focus:outline-none text-xl font-medium leading-5 text-gray-700">{{offer.get("title")}}</p>
-      <p class="focus:outline-none text-sm leang seerveding-normal pt-2 text-gray-500">von {{offer.get("first_name")}} {{offer.get("last_name")}}</p>
-      <p class="focus:outline-none text-sm leading-normal pt-2 text-gray-500">{{offer.get("appointments").length}} Termine</p>
+<div class="flex items-center border-b border-gray-200 pb-6 h-full" *ngIf="loaded">
+  <div class="flex justify-between w-full text-gray-700">
+      <div class="flex">
+        <img src="{{user?.avatar_urls[48]}}" class="rounded-full h-12 w-12 mr-6" alt="avatar">
+        <div>
+        <p class="focus:outline-none text-xl font-medium leading-5 text-gray-700">{{offer.get("title")}}</p>
+        <p class="focus:outline-none text-sm leang seerveding-normal pt-2 text-gray-500">von {{user.name}}</p>
+        <p class="focus:outline-none text-sm leading-normal pt-1 text-gray-500 text-sm">erstellt am {{offer.get("date")}}</p>
+        <p class="focus:outline-none text-sm leading-normal pt-1 text-gray-500">{{offer.get("appointments").length}} Termin(e)</p>
+        </div>
     </div>
-    <div class="flex" *ngIf="isOwner(offer.get('user'))">
+    <div class="flex items-start" *ngIf="isOwner(offer.get('user'))">
       <a routerLink="../edit-offer/{{offer.get('id')}}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />

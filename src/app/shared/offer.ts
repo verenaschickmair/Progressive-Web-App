@@ -9,8 +9,8 @@ export class Offer {
       description: string,
       user: number,
       subject: string,
-      first_name: string,
-      last_name: string,
+      email: string,
+      phone: string,
       appointments: {
         date: string,
       }[],

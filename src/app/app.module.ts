@@ -13,10 +13,7 @@ import {AuthenticationService} from "./shared/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { RequestListComponent } from './request-list/request-list.component';
-import { RequestDetailComponent } from './request-detail/request-detail.component';
 import { NewOfferComponent } from './new-offer/new-offer.component';
-import { NewRequestComponent } from './new-request/new-request.component';
 import { OfferComponent } from './offer/offer.component';
 import { CommentComponent } from './comment/comment.component';
 
@@ -28,10 +25,7 @@ import { CommentComponent } from './comment/comment.component';
     LoginComponent,
     ProfileComponent,
     OfferDetailComponent,
-    RequestListComponent,
-    RequestDetailComponent,
     NewOfferComponent,
-    NewRequestComponent,
     OfferComponent,
     CommentComponent
   ],

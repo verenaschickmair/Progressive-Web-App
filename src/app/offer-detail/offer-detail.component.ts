@@ -7,6 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CommentFactoryService} from "../shared/comment-factory";
 import {CommentFormErrorMessages} from "./offer-detail-error-messages";
 import {Comment} from "../shared/comment";
+import {OfferFactoryService} from "../shared/offer-factory";
 
 @Component({
   selector: 'app-offer-detail',
@@ -20,6 +21,7 @@ export class OfferDetailComponent implements OnInit {
   loaded = false;
   commentForm : FormGroup;
   isLoggedIn = window.localStorage.getItem('token');
+  loginUser? : any;
   errors: {  [key: string]: string } = {};
 
   constructor(private route : ActivatedRoute,
@@ -39,6 +41,11 @@ export class OfferDetailComponent implements OnInit {
       this.offer.date = new Date(this.offer.date).toLocaleDateString('de-DE');
       this.us.getUserById(this.offer.acf.user).then((u) => {
         this.user = u;
+        if(this.isLoggedIn){
+          this.us.getLoggedInUser().then((u) => {
+            this.loginUser = u;
+          });
+        }
         this.renderComments();
       });
       this.commentForm = this.fb.group({
@@ -77,17 +84,17 @@ export class OfferDetailComponent implements OnInit {
   }
 
   public addComment(): void{
-    if(this.user.id) {
-      console.log(this.commentForm.value)
+    if(this.loginUser.id) {
       this.updateErrorMessages();
       const comment: Comment = CommentFactoryService.fromObject(this.commentForm.value);
-      comment.fields.user = this.user.id;
+      comment.fields.user = this.loginUser.id;
       comment.fields.offer = [this.offer.id];
       comment.status = "publish";
       comment.title = "Comment User " + comment.fields.user + " for Offer " + comment.fields.offer[0]
       console.log(comment);
 
       this.cs.createComment(comment).then((c) => {
+        this.commentForm.reset(OfferFactoryService.empty());
         new Notification("Kommentar erfolgreich verfasst!");
         this.renderComments();
       })

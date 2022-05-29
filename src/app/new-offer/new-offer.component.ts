@@ -70,7 +70,7 @@ export class NewOfferComponent implements OnInit {
       description: [this.offer.acf.description, [Validators.minLength(10), Validators.maxLength(1000)]],
       subject: [this.offer.acf.subject, [Validators.required]],
       phone: [this.offer.acf.phone, [Validators.required]],
-      email: [this.offer.acf.email, [Validators.required]],
+      email: [this.offer.acf.email, [Validators.required, Validators.email]],
       categories: this.offer.categories,
       user: this.offer.acf.user,
       appointments: this.appointments,

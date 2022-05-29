@@ -32,6 +32,7 @@
                     <option id="8" [selected]="offer.acf.subject === 'informatik'">Informatik</option>
                     <option id="9" [selected]="offer.acf.subject === 'biologie'">Biologie</option>
                 </select>
+                <div *ngIf="errors['subject']" class="text-red-500 text-sm"> {{ errors['subject'] }}</div>
               </div>
 
               <fieldset>
@@ -51,6 +52,7 @@
                 <label for="phone" class="block text-sm font-medium text-gray-700"> Telefonnummer </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input id="phone" formControlName="phone" type="text"  class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
+                  <div *ngIf="errors['phone']" class="text-red-500 text-sm"> {{ errors['phone'] }}</div>
                 </div>
               </div>
 
@@ -58,6 +60,7 @@
                 <label for="email" class="block text-sm font-medium text-gray-700"> Email-Adresse</label>
                 <div class="mt-1 flex rounded-md shadow-sm">
                   <input id="email" formControlName="email" type="text" class="p-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full">
+                  <div *ngIf="errors['email']" class="text-red-500 text-sm"> {{ errors['email'] }}</div>
                 </div>
               </div>
 

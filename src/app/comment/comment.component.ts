@@ -15,7 +15,7 @@ export class CommentComponent implements OnInit {
   @Input() comment! : any;
   @Output() deleteEvent = new EventEmitter();
   user? : any;
-  loginUserId? = 0;
+  loginUser? : any;
   loaded = false;
 
 
@@ -26,18 +26,20 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.us.getLoggedInUser()
-      .then((user) => {
-        this.us.getUserById(this.comment.acf.user).then((user) => {
+      .then((loginUser) => {
+        this.loginUser = loginUser;
+        this.us.getUserById(this.comment.acf.user)
+          .then((user) => {
+            console.log(user)
           this.user = user;
+          this.comment.date = new Date(this.comment.date).toLocaleDateString('de-DE');
+          this.loaded = true;
         })
-        this.comment.date = new Date(this.comment.date).toLocaleDateString('de-DE');
-        this.loginUserId = user.id;
-        this.loaded = true;
       });
   }
 
   isCurrentUserOwner() : boolean{
-    return this.loginUserId === this.comment.acf.user;
+    return this.loginUser.id === this.user.id;
   }
 
   public deleteComment(){

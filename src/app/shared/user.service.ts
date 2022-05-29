@@ -45,7 +45,7 @@ export class UserService {
     return fetch(`https://api.s1910456028.student.kwmhgb.at/wp-json/wp/v2/users/${id}`, options)
       .then(response => response.json())
       .then(response => {
-        this.user?.next(response);
+        this.user.next(response);
         return this.user.getValue();
       })
       .catch(error => console.log('error', error));

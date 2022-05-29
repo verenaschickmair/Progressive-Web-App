@@ -13,5 +13,5 @@ export const NewOfferErrorMessages = [
   new ErrorMessage('date', 'required', 'Es muss ein Datum angegeben werden'),
   new ErrorMessage('phone', 'required', 'Es muss eine Telefonnummer angegeben werden'),
   new ErrorMessage('email', 'required', 'Es muss eine Email-Adresse angegeben werden'),
-
+  new ErrorMessage('email', 'email', 'Bitte ein gültiges Email-Format verwenden'),
 ];

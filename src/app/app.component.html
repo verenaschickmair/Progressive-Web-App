@@ -1,8 +1,8 @@
 <div class="flex justify-center divide-x-4 divide-white max-w-screen-2xl mx-auto mb-1">
   <a routerLink="home" routerLinkActive="active" class="active:bg-white active:text-gray-700 active:underline hover:border-gray-800 focus:bg-white focus:underline focus:text-gray-700 border-transparent text-lg p-4 duration-200 w-full text-center bg-gray-800 text-white hover:bg-transparent hover:text-gray-700">Home</a>
   <a routerLink="offers" routerLinkActive="active" class="active:bg-white active:text-gray-700 active:underline hover:border-gray-800 focus:bg-white focus:underline focus:text-gray-700 border-transparent text-lg p-4 duration-200 w-full text-center bg-gray-800 text-white hover:bg-transparent hover:text-gray-700">Angebote</a>
-  <a *ngIf="isLoggedIn" routerLink="profile" routerLinkActive="active" class="active:bg-white active:text-gray-700 active:underline hover:border-gray-800 focus:bg-white focus:underline focus:text-gray-700 border-transparent text-lg p-4 duration-200 w-full text-center bg-gray-800 text-white hover:bg-transparent hover:text-gray-700">Profil</a>
-  <a routerLink="login" *ngIf="!isLoggedIn" routerLinkActive="active" class="active:bg-white active:text-gray-700 active:underline hover:border-gray-800 focus:bg-white focus:underline focus:text-gray-700 border-transparent text-lg p-4 duration-200 w-full text-center bg-gray-800 text-white hover:bg-transparent hover:text-gray-700">Login</a>
+  <a *ngIf="isLoggedIn()" routerLink="profile" routerLinkActive="active" class="active:bg-white active:text-gray-700 active:underline hover:border-gray-800 focus:bg-white focus:underline focus:text-gray-700 border-transparent text-lg p-4 duration-200 w-full text-center bg-gray-800 text-white hover:bg-transparent hover:text-gray-700">Profil</a>
+  <a routerLink="login" *ngIf="!isLoggedIn()" routerLinkActive="active" class="active:bg-white active:text-gray-700 active:underline hover:border-gray-800 focus:bg-white focus:underline focus:text-gray-700 border-transparent text-lg p-4 duration-200 w-full text-center bg-gray-800 text-white hover:bg-transparent hover:text-gray-700">Login</a>
 </div>
   <div
     class="

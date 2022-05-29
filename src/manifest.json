@@ -1,8 +1,8 @@
 {
   "name": "StudyBuddy",
   "short_name": "StudBud",
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#222222",
+  "background_color": "#222222",
   "display": "standalone",
   "scope": "/",
   "start_url": "/index.html",

@@ -35,8 +35,6 @@ export class OfferListComponent implements OnInit {
     this.totalPages = 1;
     this.currentPage = 1;
 
-    console.assert(!!mode && !!value, "Keine Filter aktiv :)")
-
     if(mode && value) {
       console.countReset("Offers");
       this.offerList = [];
